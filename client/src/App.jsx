@@ -9,6 +9,10 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PropertyDetail from "./pages/PropertyDetail";
+import Dashboard from "./pages/Dashboard";
+import CreateProperty from "./pages/CreateProperty";
+import EditProperty from "./pages/EditProperty";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -19,8 +23,33 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          {/* "/new" must come before "/:id" so it is not read as an id. */}
+          <Route
+            path="/properties/new"
+            element={
+              <ProtectedRoute>
+                <CreateProperty />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/properties/:id/edit"
+            element={
+              <ProtectedRoute>
+                <EditProperty />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/properties/:id" element={<PropertyDetail />} />
-          {/* Protected routes (dashboard, profile) are added in later modules. */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          {/* The profile route is added in the final module. */}
           <Route path="*" element={<div className="container"><h2>404 — Page not found</h2></div>} />
         </Routes>
       </main>
