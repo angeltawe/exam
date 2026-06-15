@@ -93,12 +93,44 @@ npm run dev               # starts on http://localhost:5173
 This project is built **module by module**. See the commit history for each step.
 
 - [x] Module 1 — Project scaffold
-- [ ] Module 2 — Backend foundation
-- [ ] Module 3 — Authentication
-- [ ] Module 4 — Account management
-- [ ] Module 5 — Property CRUD
-- [ ] Module 6 — Frontend scaffold
-- [ ] Module 7 — Auth pages
-- [ ] Module 8 — Property feed
-- [ ] Module 9 — Dashboard
-- [ ] Module 10 — Profile settings
+- [x] Module 2 — Backend foundation
+- [x] Module 3 — Authentication
+- [x] Module 4 — Account management
+- [x] Module 5 — Property CRUD
+- [x] Module 6 — Frontend scaffold
+- [x] Module 7 — Auth pages
+- [x] Module 8 — Property feed
+- [x] Module 9 — Dashboard
+- [x] Module 10 — Profile settings
+
+---
+
+## Features at a glance
+
+- **Authentication** — register/login with salted + hashed passwords (bcrypt) and JWT.
+- **Account dashboard** — edit name, phone, and avatar; change password (old one verified).
+- **Property listings** — full CRUD; authors can edit/delete only their own listings.
+- **Public feed** — browse, search by city, and filter by type and price range (no login needed).
+- **My Listings** — private dashboard showing only the listings you authored.
+- **Robust UX** — explicit loading, empty, and error states everywhere; form validation
+  before any network call; protected routes that redirect guests to login.
+
+## Folder map (final)
+
+```
+server/
+  config/db.js                 MongoDB connection
+  models/                      User, Property (Mongoose schemas)
+  repositories/                Data-access layer
+  controllers/                 Business logic + validation
+  routes/                      RESTful endpoints
+  middleware/                  protect (JWT) + error handlers
+  utils/                       asyncHandler, generateToken
+client/src/
+  api/axios.js                 Axios instance + JWT interceptor
+  context/AuthContext.jsx      Global auth state
+  components/                  Navbar, PropertyCard, FilterBar, PropertyForm,
+                               InputField, Loader, Message, ProtectedRoute
+  pages/                       Home, Login, Register, PropertyDetail,
+                               Dashboard, CreateProperty, EditProperty, Profile
+```

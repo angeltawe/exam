@@ -12,6 +12,7 @@ import PropertyDetail from "./pages/PropertyDetail";
 import Dashboard from "./pages/Dashboard";
 import CreateProperty from "./pages/CreateProperty";
 import EditProperty from "./pages/EditProperty";
+import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -49,7 +50,14 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          {/* The profile route is added in the final module. */}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<div className="container"><h2>404 — Page not found</h2></div>} />
         </Routes>
       </main>
