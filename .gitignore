@@ -20,3 +20,6 @@ Thumbs.db
 
 # Claude Code harness settings (local only)
 .claude/
+
+# Temp commit message scratch file
+commit_msg.txt
