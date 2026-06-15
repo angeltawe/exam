@@ -18,7 +18,7 @@ files with comments explaining *what* each part does and *why*.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 EXAM/
@@ -47,7 +47,7 @@ The backend follows a clean **3-layer architecture**:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18 or newer)
@@ -70,7 +70,7 @@ npm run dev               # starts on http://localhost:5173
 
 ---
 
-## 📡 API Overview
+## API Overview
 
 | Method | Endpoint                  | Access  | Description                         |
 | ------ | ------------------------- | ------- | ----------------------------------- |
@@ -88,7 +88,7 @@ npm run dev               # starts on http://localhost:5173
 
 ---
 
-## ✅ Build Progress
+## Build Progress
 
 This project is built **module by module**. See the commit history for each step.
 

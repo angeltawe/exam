@@ -17,3 +17,6 @@ npm-debug.log*
 .vscode/
 .idea/
 Thumbs.db
+
+# Claude Code harness settings (local only)
+.claude/
