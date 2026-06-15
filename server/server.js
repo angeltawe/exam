@@ -39,7 +39,7 @@ app.get("/api/health", (req, res) => {
 // Feature routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
-// (Property routes are added in a later module.)
+app.use("/api/properties", require("./routes/propertyRoutes"));
 
 // ----- Error handling (must be registered AFTER the routes) -----
 app.use(notFound);
