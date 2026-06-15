@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PropertyDetail from "./pages/PropertyDetail";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/properties/:id" element={<PropertyDetail />} />
           {/* Protected routes (dashboard, profile) are added in later modules. */}
           <Route path="*" element={<div className="container"><h2>404 — Page not found</h2></div>} />
         </Routes>
