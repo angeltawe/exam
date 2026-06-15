@@ -6,6 +6,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { FiEdit2, FiInfo, FiMapPin, FiUser, FiArrowLeft } from "react-icons/fi";
 import api from "../api/axios";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -58,7 +59,7 @@ export default function PropertyDetail() {
       <div className="container">
         <Message type="error">{error}</Message>
         <Link to="/" className="btn btn-outline">
-          ← Back to browse
+          <FiArrowLeft /> Back to browse
         </Link>
       </div>
     );
@@ -71,15 +72,15 @@ export default function PropertyDetail() {
 
   return (
     <div className="container">
-      <Link to="/" className="muted">
-        ← Back to browse
+      <Link to="/" className="muted" style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+        <FiArrowLeft /> Back to browse
       </Link>
 
       <div className="page-head" style={{ marginTop: 12 }}>
         <div>
           <h1 style={{ margin: 0 }}>{property.title}</h1>
-          <p className="muted" style={{ margin: "4px 0 0" }}>
-            📍 {property.city}, {property.country}
+          <p className="muted" style={{ margin: "4px 0 0", display: "flex", alignItems: "center", gap: 6 }}>
+            <FiMapPin /> {property.city}, {property.country}
           </p>
         </div>
         <div className="row">
@@ -108,7 +109,7 @@ export default function PropertyDetail() {
                   onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
                   style={{
                     cursor: "pointer",
-                    outline: url === activeImage ? "2px solid var(--oxblood)" : "none",
+                    outline: url === activeImage ? "2px solid var(--navy)" : "none",
                   }}
                 />
               ))}
@@ -149,25 +150,38 @@ export default function PropertyDetail() {
             </div>
 
             {isOwner ? (
-              <Link to={`/properties/${property._id}/edit`} className="btn btn-primary btn-block">
-                Edit this listing
-              </Link>
+              <>
+                <div className="message message-info" style={{ marginBottom: 12 }}>
+                  <FiInfo /> This is your listing — you can edit or delete it.
+                </div>
+                <Link to={`/properties/${property._id}/edit`} className="btn btn-primary btn-block">
+                  <FiEdit2 /> Edit this listing
+                </Link>
+              </>
             ) : (
-              <div className="card" style={{ background: "var(--bg)", marginTop: 4 }}>
-                <h3 style={{ margin: "0 0 6px" }}>Contact the lister</h3>
-                {property.owner ? (
-                  <>
-                    <p className="muted" style={{ margin: 0 }}>
-                      {property.owner.name || property.owner.username}
-                    </p>
-                    <p className="muted" style={{ margin: 0 }}>
-                      Sign in and reach out through PropSpace to enquire.
-                    </p>
-                  </>
-                ) : (
-                  <p className="muted" style={{ margin: 0 }}>Lister details unavailable.</p>
-                )}
-              </div>
+              <>
+                <div className="notice-warn" style={{ marginBottom: 12 }}>
+                  <FiInfo /> This listing belongs to another user. You can&apos;t edit
+                  or delete other people&apos;s listings.
+                </div>
+                <div className="card" style={{ background: "var(--bg)", marginTop: 4 }}>
+                  <h3 className="section-title" style={{ fontSize: "1.05rem" }}>
+                    <FiUser /> Listed by
+                  </h3>
+                  {property.owner ? (
+                    <>
+                      <p className="muted" style={{ margin: 0 }}>
+                        {property.owner.name || property.owner.username}
+                      </p>
+                      <p className="muted" style={{ margin: "4px 0 0" }}>
+                        Sign in and reach out through PropSpace to enquire.
+                      </p>
+                    </>
+                  ) : (
+                    <p className="muted" style={{ margin: 0 }}>Lister details unavailable.</p>
+                  )}
+                </div>
+              </>
             )}
           </div>
         </aside>
