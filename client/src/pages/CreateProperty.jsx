@@ -9,9 +9,9 @@ export default function CreateProperty() {
   const navigate = useNavigate();
 
   async function handleCreate(payload) {
-    const { data } = await api.post("/properties", payload);
-    // Go straight to the new listing's detail page.
-    navigate(`/properties/${data.property._id}`);
+    await api.post("/properties", payload);
+    // After creating, take the user to their "My Listings" dashboard.
+    navigate("/dashboard");
   }
 
   return (

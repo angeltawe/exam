@@ -51,7 +51,8 @@ export default function EditProperty() {
 
   async function handleUpdate(payload) {
     await api.put(`/properties/${id}`, payload);
-    navigate(`/properties/${id}`);
+    // After saving changes, return to the "My Listings" dashboard.
+    navigate("/dashboard");
   }
 
   if (loading) return <Loader text="Loading listing..." />;
