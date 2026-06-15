@@ -6,7 +6,7 @@
 // Localised for Cameroon: country defaults to Cameroon, the city field suggests
 // Cameroonian cities, and the price is in FCFA.
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import InputField from "./InputField";
 import Message from "./Message";
 import { CAMEROON_CITIES, PROPERTY_TYPES } from "../utils/format";
@@ -27,9 +27,19 @@ export default function PropertyForm({ initial, onSubmit, submitLabel = "Save" }
   const [form, setForm] = useState({ ...EMPTY, ...initial });
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const errorRef = useRef(null);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  // Show the error and make sure the user actually sees it, even on a long form.
+  function showError(text) {
+    setError(text);
+    // Wait for the message to render, then scroll it into view.
+    setTimeout(() => {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 0);
   }
 
   function validate() {
@@ -47,7 +57,7 @@ export default function PropertyForm({ initial, onSubmit, submitLabel = "Save" }
     e.preventDefault();
     const validationError = validate();
     if (validationError) {
-      setError(validationError);
+      showError(validationError);
       return;
     }
 
@@ -71,14 +81,16 @@ export default function PropertyForm({ initial, onSubmit, submitLabel = "Save" }
         images,
       });
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong. Please try again.");
+      showError(err.response?.data?.message || "Something went wrong. Please try again.");
       setSubmitting(false); // let the user fix and retry
     }
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <Message type="error">{error}</Message>
+      <div ref={errorRef}>
+        <Message type="error">{error}</Message>
+      </div>
 
       <InputField
         label="Title"
@@ -172,6 +184,9 @@ export default function PropertyForm({ initial, onSubmit, submitLabel = "Save" }
         onChange={handleChange}
         placeholder={"https://example.com/photo1.jpg\nhttps://example.com/photo2.jpg"}
       />
+
+      {/* Repeat the error here so it is visible right next to the button. */}
+      <Message type="error">{error}</Message>
 
       <button className="btn btn-primary" disabled={submitting}>
         {submitting ? "Saving..." : submitLabel}
