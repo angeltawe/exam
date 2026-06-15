@@ -31,6 +31,7 @@ const propertySchema = new mongoose.Schema(
       type: String,
       required: [true, "Country is required"],
       trim: true,
+      default: "Cameroon",
     },
     type: {
       type: String,

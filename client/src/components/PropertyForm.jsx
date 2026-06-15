@@ -2,17 +2,21 @@
 // One reusable form used for BOTH creating and editing a listing. The parent
 // page decides what to do on submit (POST vs PUT) and passes initial values.
 // Reusing one form avoids duplicating all this markup and validation twice.
+//
+// Localised for Cameroon: country defaults to Cameroon, the city field suggests
+// Cameroonian cities, and the price is in FCFA.
 
 import { useState } from "react";
 import InputField from "./InputField";
 import Message from "./Message";
+import { CAMEROON_CITIES, PROPERTY_TYPES } from "../utils/format";
 
 const EMPTY = {
   title: "",
   description: "",
   price: "",
   city: "",
-  country: "",
+  country: "Cameroon",
   type: "Apartment",
   listingType: "rent",
   imagesText: "", // one image URL per line; converted to an array on submit
@@ -81,7 +85,7 @@ export default function PropertyForm({ initial, onSubmit, submitLabel = "Save" }
         name="title"
         value={form.title}
         onChange={handleChange}
-        placeholder="Sunny 2-bedroom apartment"
+        placeholder="Spacious 2-bedroom in Bonapriso"
         required
       />
       <InputField
@@ -95,18 +99,20 @@ export default function PropertyForm({ initial, onSubmit, submitLabel = "Save" }
       />
 
       <div className="row">
-        <div className="field" style={{ flex: 1 }}>
+        <div className="field" style={{ flex: 1, minWidth: 140 }}>
           <label>
             Type <span className="required">*</span>
           </label>
           <select name="type" value={form.type} onChange={handleChange}>
-            <option value="Apartment">Apartment</option>
-            <option value="House">House</option>
-            <option value="Studio">Studio</option>
+            {PROPERTY_TYPES.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
           </select>
         </div>
 
-        <div className="field" style={{ flex: 1 }}>
+        <div className="field" style={{ flex: 1, minWidth: 140 }}>
           <label>
             Listing <span className="required">*</span>
           </label>
@@ -118,34 +124,41 @@ export default function PropertyForm({ initial, onSubmit, submitLabel = "Save" }
       </div>
 
       <div className="row">
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, minWidth: 140 }}>
           <InputField
-            label="Price (USD)"
+            label="Price (FCFA)"
             name="price"
             type="number"
             value={form.price}
             onChange={handleChange}
-            placeholder="1200"
+            placeholder="150000"
             required
           />
         </div>
-        <div style={{ flex: 1 }}>
-          <InputField
-            label="City"
+        <div className="field" style={{ flex: 1, minWidth: 140 }}>
+          <label>
+            City <span className="required">*</span>
+          </label>
+          <input
             name="city"
+            list="cm-cities-form"
             value={form.city}
             onChange={handleChange}
-            placeholder="Paris"
-            required
+            placeholder="Douala"
           />
+          <datalist id="cm-cities-form">
+            {CAMEROON_CITIES.map((c) => (
+              <option key={c} value={c} />
+            ))}
+          </datalist>
         </div>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, minWidth: 140 }}>
           <InputField
             label="Country"
             name="country"
             value={form.country}
             onChange={handleChange}
-            placeholder="France"
+            placeholder="Cameroon"
             required
           />
         </div>

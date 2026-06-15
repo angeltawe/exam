@@ -107,6 +107,10 @@ This project is built **module by module**. See the commit history for each step
 
 ## Features at a glance
 
+- **Cameroon-localised** — prices in **FCFA**, Cameroonian city suggestions
+  (Douala, Yaoundé, Bamenda…), and country defaulting to Cameroon.
+- **Professional oxblood + white theme** that is fully responsive (phone/tablet/desktop).
+
 - **Authentication** — register/login with salted + hashed passwords (bcrypt) and JWT.
 - **Account dashboard** — edit name, phone, and avatar; change password (old one verified).
 - **Property listings** — full CRUD; authors can edit/delete only their own listings.

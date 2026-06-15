@@ -4,6 +4,7 @@
 // makes it reusable on the public feed AND the dashboard.
 
 import { Link } from "react-router-dom";
+import { formatPrice } from "../utils/format";
 
 // A neutral placeholder image when a listing has no photos.
 const PLACEHOLDER = "https://placehold.co/600x400?text=No+Image";
@@ -30,7 +31,7 @@ export default function PropertyCard({ property }) {
         <div className="muted">
           {property.city}, {property.country}
         </div>
-        <div className="price">${Number(property.price).toLocaleString()}</div>
+        <div className="price">{formatPrice(property.price)}</div>
       </div>
     </Link>
   );

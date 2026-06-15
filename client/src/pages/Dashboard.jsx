@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import api from "../api/axios";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { formatPrice } from "../utils/format";
 
 export default function Dashboard() {
   const [properties, setProperties] = useState([]);
@@ -90,17 +91,17 @@ export default function Dashboard() {
                 <div className="muted">
                   {p.city}, {p.country}
                 </div>
-                <div className="price">${Number(p.price).toLocaleString()}</div>
+                <div className="price">{formatPrice(p.price)}</div>
 
                 <div className="row" style={{ marginTop: 8 }}>
-                  <Link to={`/properties/${p._id}`} className="btn btn-outline">
+                  <Link to={`/properties/${p._id}`} className="btn btn-outline btn-sm">
                     View
                   </Link>
-                  <Link to={`/properties/${p._id}/edit`} className="btn btn-outline">
+                  <Link to={`/properties/${p._id}/edit`} className="btn btn-outline btn-sm">
                     Edit
                   </Link>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger btn-sm"
                     onClick={() => handleDelete(p._id)}
                     disabled={deletingId === p._id}
                   >

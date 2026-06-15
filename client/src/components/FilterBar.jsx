@@ -1,8 +1,10 @@
 // src/components/FilterBar.jsx
 // The search/filter controls for the public feed. It keeps its own local form
-// state and calls onApply(filters) when the user searches, or onReset() to clear.
+// state and calls onApply(filters) when the user searches, or resets to clear.
+// City suggestions are Cameroonian cities, prices are in FCFA.
 
 import { useState } from "react";
+import { CAMEROON_CITIES, PROPERTY_TYPES } from "../utils/format";
 
 const EMPTY = { city: "", type: "", minPrice: "", maxPrice: "" };
 
@@ -29,24 +31,32 @@ export default function FilterBar({ onApply }) {
         <label>City</label>
         <input
           name="city"
+          list="cm-cities"
           value={filters.city}
           onChange={handleChange}
-          placeholder="e.g. Paris"
+          placeholder="e.g. Douala"
         />
+        <datalist id="cm-cities">
+          {CAMEROON_CITIES.map((c) => (
+            <option key={c} value={c} />
+          ))}
+        </datalist>
       </div>
 
       <div className="field">
         <label>Type</label>
         <select name="type" value={filters.type} onChange={handleChange}>
           <option value="">Any</option>
-          <option value="Apartment">Apartment</option>
-          <option value="House">House</option>
-          <option value="Studio">Studio</option>
+          {PROPERTY_TYPES.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="field">
-        <label>Min price</label>
+        <label>Min price (FCFA)</label>
         <input
           name="minPrice"
           type="number"
@@ -58,7 +68,7 @@ export default function FilterBar({ onApply }) {
       </div>
 
       <div className="field">
-        <label>Max price</label>
+        <label>Max price (FCFA)</label>
         <input
           name="maxPrice"
           type="number"
@@ -69,7 +79,7 @@ export default function FilterBar({ onApply }) {
         />
       </div>
 
-      <div className="row">
+      <div className="filter-actions">
         <button className="btn btn-primary" type="submit">
           Search
         </button>

@@ -52,11 +52,16 @@ export default function Home() {
   }, [filters, fetchProperties]);
 
   return (
-    <div className="container">
-      <h1>Browse properties</h1>
-      <p className="muted">Find a place to rent or buy.</p>
+    <div>
+      <section className="hero">
+        <div className="hero-inner">
+          <h1>Find your next home in Cameroon</h1>
+          <p>Apartments, houses, and studios for rent or sale — from Douala to Yaoundé.</p>
+        </div>
+      </section>
 
-      <FilterBar onApply={setFilters} />
+      <div className="container">
+        <FilterBar onApply={setFilters} />
 
       {/* Async UX states: loading -> error -> empty -> results */}
       {loading ? (
@@ -75,6 +80,7 @@ export default function Home() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }
