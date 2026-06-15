@@ -1,0 +1,14 @@
+Module 6: Frontend scaffold (React + Vite)
+
+- Set up Vite React app: package.json, vite.config, index.html, env example
+- Add shared Axios instance with a request interceptor that auto-attaches the JWT
+  and a response interceptor that logs out + redirects on 401
+- Add AuthContext for global auth state (login/register/logout, persisted in
+  localStorage so refresh keeps the session)
+- Add reusable UI primitives: Navbar, Loader, Message, InputField
+- Add App router skeleton with a Home placeholder and a 404 route
+- Add a clean global stylesheet used across all pages
+
+Verified: npm run build compiles successfully.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
