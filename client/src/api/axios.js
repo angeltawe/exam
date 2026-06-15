@@ -9,6 +9,8 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  // Give up after 10s so a request never hangs forever if the API is down.
+  timeout: 10000,
 });
 
 // --- Attach the token to outgoing requests ---

@@ -54,10 +54,14 @@ export default function PropertyDetail() {
 
   if (loading) return <Loader text="Loading property..." />;
 
-  if (error) {
+  // Show a friendly message for any error OR if no property came back, so we
+  // never crash to a blank page (e.g. if the backend is unreachable).
+  if (error || !property) {
     return (
       <div className="container">
-        <Message type="error">{error}</Message>
+        <Message type="error">
+          {error || "This property could not be loaded."}
+        </Message>
         <Link to="/" className="btn btn-outline">
           <FiArrowLeft /> Back to browse
         </Link>
