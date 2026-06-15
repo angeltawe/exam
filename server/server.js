@@ -36,7 +36,9 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "ok", message: "PropSpace API is running" });
 });
 
-// (Auth, user, and property routes are added in later modules.)
+// Feature routes
+app.use("/api/auth", require("./routes/authRoutes"));
+// (User and property routes are added in later modules.)
 
 // ----- Error handling (must be registered AFTER the routes) -----
 app.use(notFound);
